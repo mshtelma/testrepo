@@ -7,6 +7,8 @@
 
 # MAGIC %scala
 # MAGIC val df = spark.parallelize(List(1,2,3,4))
+# MAGIC val df2 = spark.parallelize(List(1,2,3,4))
+
 
 # COMMAND ----------
 
