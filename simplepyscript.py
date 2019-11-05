@@ -2,7 +2,3 @@
 import random
 print(random.random())
 
-
-# COMMAND ----------
-
-print('ssss')
