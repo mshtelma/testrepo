@@ -6,8 +6,13 @@
 # COMMAND ----------
 
 # MAGIC %scala
-# MAGIC val df = spark.parallelize(List(1,2,3,4))
-# MAGIC val df2 = spark.parallelize(List(1,2,3,4))
+# MAGIC val df = spark.range(1,100)
+# MAGIC val df2 = spark.range(200,300)
+
+# COMMAND ----------
+
+# MAGIC %scala 
+# MAGIC display(df2)
 
 # COMMAND ----------
 
