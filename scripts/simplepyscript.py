@@ -2,3 +2,5 @@
 import random
 print(random.random())
 print('asdf')
+
+a = 1
