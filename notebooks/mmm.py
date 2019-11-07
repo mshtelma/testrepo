@@ -16,4 +16,5 @@
 
 # COMMAND ----------
 
-
+# MAGIC %python
+# MAGIC print('dddd')
