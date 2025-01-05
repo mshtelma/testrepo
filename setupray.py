@@ -16,3 +16,5 @@ ray.get(pg.ready(), timeout=10)
 ready, unready = ray.wait([pg.ready()], timeout=10)
 
 print(placement_group_table(pg))
+print("ready ", ready)
+print("unready ", unready)
