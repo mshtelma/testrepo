@@ -1,6 +1,9 @@
 import ray
-from ray.util.placement_group import placement_group
-
+from ray.util.placement_group import (
+    placement_group,
+    placement_group_table,
+    remove_placement_group,
+)
 ray.init()
 
 pg = placement_group(
@@ -8,4 +11,8 @@ pg = placement_group(
     strategy="SPREAD"       
 )
 
-ray.get(pg.ready())
+ray.get(pg.ready(), timeout=10)
+
+ready, unready = ray.wait([pg.ready()], timeout=10)
+
+print(placement_group_table(pg))
