@@ -11,7 +11,7 @@ pg = placement_group(
     strategy="SPREAD"       
 )
 
-ray.get(pg.ready(), timeout=10)
+ray.get(pg.ready(), timeout=20)
 
 ready, unready = ray.wait([pg.ready()], timeout=10)
 
