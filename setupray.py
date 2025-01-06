@@ -26,8 +26,8 @@ print("unready ", unready)
 class Actor:
     def __init__(self):
         import torch.distributed as dist
-
         dist.init_process_group(backend='nccl', rank=0, world_size=16)
+
         self.llm = LLM(model="/model", tensor_parallel_size=16)
 
     def generate(self):
@@ -40,4 +40,4 @@ actor = Actor.options(
     scheduling_strategy=PlacementGroupSchedulingStrategy(placement_group=pg, )
 ).remote()
 
-ray.get(actor.generate.remote(), timeout=100)
+ray.get(actor.generate.remote(), timeout=100000)
