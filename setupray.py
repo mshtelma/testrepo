@@ -22,7 +22,7 @@ print("ready ", ready)
 print("unready ", unready)
 
 
-@ray.remote(num_gpus=16)
+@ray.remote(num_cpus=1)
 class Actor:
     def __init__(self):
         import torch.distributed as dist
