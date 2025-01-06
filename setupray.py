@@ -9,7 +9,7 @@ from vllm import LLM, SamplingParams
 ray.init()
 
 pg = placement_group(
-    [{"CPU": 1, "GPU": 1}] * 16,
+    [{"CPU": 1}]  + [{"CPU": 1, "GPU": 1}] * 16,
     strategy="SPREAD"
 )
 
