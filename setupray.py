@@ -25,10 +25,10 @@ print("unready ", unready)
 @ray.remote(num_cpus=1)
 class Actor:
     def __init__(self):
-        import torch.distributed as dist
-        dist.init_process_group(backend='nccl', rank=0, world_size=16)
+        #import torch.distributed as dist
+        #dist.init_process_group(backend='nccl', rank=0, world_size=16)
 
-        self.llm = LLM(model="/model", tensor_parallel_size=16)
+        self.llm = LLM(model="/model", trust_remote_code=True, tensor_parallel_size=8, pipeline_parallel_size=2)
 
     def generate(self):
         sampling_params = SamplingParams(temperature=0.8, top_p=0.95)
