@@ -13,9 +13,7 @@ while True:
             api_key=openai_api_key,
             base_url=openai_api_base,
         )
-        completion = client.completions.create(model="model",
-                                               prompt="San Francisco is a")
-        print("Completion result:", completion)
+        print("Models:", client.models.list())
         print("Done waiting. Model is available.")
         break
     except Exception as error:
