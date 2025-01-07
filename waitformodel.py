@@ -14,7 +14,7 @@ while True:
             base_url=openai_api_base,
         )
         print("Models:", client.models.list())
-        print("Done waiting. Model is available.")
+        print("Done waiting. Model is available!")
         break
     except Exception as error:
         print(error)
