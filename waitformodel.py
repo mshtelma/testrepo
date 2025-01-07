@@ -16,6 +16,7 @@ while True:
         completion = client.completions.create(model="model",
                                                prompt="San Francisco is a")
         print("Completion result:", completion)
+        print("Done waiting. Model is available.")
         break
     except Exception as error:
         print(error)

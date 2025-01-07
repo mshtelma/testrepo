@@ -1,6 +1,6 @@
 from openai import OpenAI
 from pydantic import BaseModel
-
+print("Testing model...")
 openai_api_key = "EMPTY"
 openai_api_base = "http://localhost:8000/v1"
 client = OpenAI(
@@ -10,7 +10,7 @@ client = OpenAI(
 completion = client.completions.create(model="model",
                                        prompt="San Francisco is a")
 print("Completion result:", completion)
-
+print("Text test passed.")
 
 class CalendarEvent(BaseModel):
     name: str
@@ -27,3 +27,4 @@ completion = client.beta.chat.completions.parse(
 )
 
 print(completion.choices[0].message.parsed)
+print("Structured generation done.")
