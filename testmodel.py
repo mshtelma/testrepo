@@ -1,30 +1,48 @@
+import argparse
+from typing import Any
+
 from openai import OpenAI
-from pydantic import BaseModel
-print("Testing model...")
-openai_api_key = "EMPTY"
-openai_api_base = "http://localhost:8000/v1"
-client = OpenAI(
-    api_key=openai_api_key,
-    base_url=openai_api_base,
-)
-completion = client.completions.create(model="model",
-                                       prompt="San Francisco is a")
-print("Completion result:", completion)
-print("Text test passed.")
 
-class CalendarEvent(BaseModel):
-    name: str
-    date: str
-    participants: list[str]
+DEFAULT_KWARGS = {
+    "temperature": 0.95,
+}
 
-completion = client.beta.chat.completions.parse(
-    model="model",
-    messages=[
-        {"role": "system", "content": "Extract the event information."},
-        {"role": "user", "content": "Alice and Bob are going to a science fair on Friday."},
-    ],
-    response_format=CalendarEvent,
-)
 
-print(completion.choices[0].message.parsed)
-print("Structured generation done.")
+def generate_text(
+        prompt: dict[str, str],
+        generation_kwargs: dict[str, Any] | None = None,
+):
+    client = OpenAI(
+        api_key="EMPTY",
+        base_url="http://localhost:8000/v1",
+    )
+    if not generation_kwargs:
+        generation_kwargs = DEFAULT_KWARGS.copy()
+
+    completion = client.chat.completions.create(
+        model="model",
+        messages=[
+            {"role": "user", "content": prompt},
+        ],
+        **generation_kwargs
+    )
+    text = completion.choices[0].message.content
+    print(f"PROMPT: {prompt}\nAnswer: {text}\n\n\n")
+    return text
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s', '--strings', nargs='+', required=True, help='Array of prompts')
+
+    args = parser.parse_args()
+    print("Testing model...")
+    print("Received array of strings:")
+    for string in args.strings:
+        generate_text(string)
+
+    print("Structured generation done.")
+
+
+if __name__ == "__main__":
+    main()
